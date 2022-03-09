@@ -17,7 +17,7 @@ exports.sendMail = async (email,otp) => {
             to:`${email}`,
             subject:"Email Varification",
             text:"",
-            html:`<br><br> <p>Dear Sumaiya,</p><br/> <p>${MailingPurpose.varifyEmail}<br/><br/>OTP is : ${otp}</p>`
+            html:`<br><br> <p>Dear User,</p><br/> <p>${MailingPurpose.varifyEmail}<br/><br/>OTP is : ${otp}</p>`
         }
         
        await mailTransporter.sendMail(details,(err)=>{
