@@ -29,8 +29,7 @@ exports.sendOTP = async (ctx) => {
                   }
             };
         }
-         sendMail(request.email,otp);
-         console.log(otp);
+         //sendMail(request.email,otp);
         await OtpModel.sendOTP({email,otp});
 
         ctx.body = {
