@@ -20,9 +20,9 @@ const OtpModel = mongoose.model("Otp", OtpSchema);
 exports.sendOTP = (request) => {
       return OtpModel.create(request);
     };
-exports.getOTP = (email) => {
+exports.getOTP = (email,otp) => {
   
-  return OtpModel.findOne({ email });
+  return OtpModel.findOne({ email,otp });
 };
 
 // exports.checkDuplicacy = (email) => {
