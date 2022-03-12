@@ -56,8 +56,8 @@ exports.verifyEmail = async (ctx) => {
                   }
             };
         }
-       const OTPData= await OtpModel.getOTP(request.email);
-       if(request.otp!==OTPData.otp){
+       const OTPData= await OtpModel.getOTP(request.email,request.otp);
+       if(!OTPData){
         throw {
             status: 400,
             message: "OTP Invalid/expired",
