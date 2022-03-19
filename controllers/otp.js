@@ -3,11 +3,18 @@
 const Validator = require("validatorjs");
 const OtpModel = require("../models/Otps");
 // const variables = require("../variables/index");
- const {sendMail}=require("../helper/sendMail")
+ const {sendMail,sendUserMail}=require("../helper/sendMail")
+ const {formatText}=require("../helper/formatText")
 
 const otpSendRules={
     email:"required|email",
     otp:"required"
+}
+const mailSendRules={
+    email:"required|email",
+    emailBody:"required",
+    emailSubject:"required",
+    emailFooter:"required"
 }
 
 
@@ -74,6 +81,33 @@ exports.verifyEmail = async (ctx) => {
     } catch (e) {
         const { status, message, error } = e;
         // console.log(error);
+        ctx.status = status || 400;
+        ctx.body = { message, error };
+    }
+};
+
+exports.SendEmail =  (ctx) => {
+    try {
+        const request = ctx.request.body;
+        const validation = new Validator(request, mailSendRules);
+        if (validation.fails()) {
+            throw {
+                status: 400,
+                message: "Invalid request",
+                error:{
+                    code:3000,
+                    message:"Invalid requrest"
+                  }
+            };
+        }
+        //sendUserMail(request.email,request.emailSubject,formatText(request.emailBody),formatText(request.emailFooter));
+         console.log(request);
+        ctx.body = {
+            message: "Email send Successfully1111"
+        };
+    } catch (e) {
+        const { status, message, error } = e;
+         console.log(error);
         ctx.status = status || 400;
         ctx.body = { message, error };
     }
