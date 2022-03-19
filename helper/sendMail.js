@@ -34,3 +34,36 @@ exports.sendMail = async (email,otp) => {
     
   };
 
+  exports.sendUserMail = async (email,subject,body,footer) => {
+    try{
+        let mailTransporter=nodemailer.createTransport({
+            service: "gmail",
+            auth:{
+                user:"testabcd134@gmail.com",
+                pass:"Nopassword@#$%"
+            }
+        })
+        
+        let details={
+            from:"testabcd134@gmail.com",
+            to:`${email}`,
+            subject:`${subject}`,
+            text:"",
+            html:`<br><br><p>${body} </p><br/><br/><p>${footer}</p>`
+        }
+        
+       await mailTransporter.sendMail(details,(err)=>{
+            if(err){
+                console.log("Sending Error ",err);
+            }
+            else{
+                console.log("Mail Sent Perfectly");
+            }
+        })
+    } catch (e){
+        console.log("Error Occured");
+    }
+    
+  };
+
+
