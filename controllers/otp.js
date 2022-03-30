@@ -36,7 +36,7 @@ exports.sendOTP = async (ctx) => {
                   }
             };
         }
-         //sendMail(request.email,otp);
+         sendMail(request.email,otp);
         await OtpModel.sendOTP({email,otp});
 
         ctx.body = {
@@ -100,7 +100,7 @@ exports.SendEmail =  (ctx) => {
                   }
             };
         }
-        //sendUserMail(request.email,request.emailSubject,formatText(request.emailBody),formatText(request.emailFooter));
+        sendUserMail(request.email,request.emailSubject,formatText(request.emailBody),formatText(request.emailFooter));
          console.log(request);
         ctx.body = {
             message: "Email send Successfully1111"
